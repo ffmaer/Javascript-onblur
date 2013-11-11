@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+
+		<script>
+			$(document).ready(function() {
+			  var div_1_text = $("#div_1").text();
+
+			  $("#div_1").editable(function(value){
+	          	return (value);
+			  },
+			  {onblur: function(value){
+			  	div_1_text = value;
+			  }});
+
+			  $("#save-button").click(function(){
+			  	$.ajax({
+					type: "POST",
+					url: "receive.php",
+					data:{
+						value:div_1_text
+					}
+			  	});
+
+			  });
+			});
+		</script>
+	</head>
+	<body>
+		<div class="editable_textarea" id="div_1">Dolor</div>
+		<div id="save-button">save</div>
+	</body>
+</html>
